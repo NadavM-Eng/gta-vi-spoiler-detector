@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "GTA 6 Spoiler Blocker",
+  "version": "0.3.0",
+  "description": "Hides GTA 6 videos on YouTube, matched by title and channel name. Other GTA games are left alone.",
+  "permissions": ["storage"],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["src/matcher.js", "src/settings.js", "src/content.js"],
+      "css": ["src/content.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_title": "GTA 6 Spoiler Blocker",
+    "default_popup": "popup/popup.html"
+  }
+}

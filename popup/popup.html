@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>GTA 6 spoiler blocker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <h1>GTA 6 spoiler blocker</h1>
+
+    <section class="card tile">
+      <div>
+        <div class="tile-label">Hidden this session</div>
+        <div class="big"><span id="count-number">0</span><small id="count-unit">videos</small></div>
+      </div>
+      <div class="seg" role="group" aria-label="Blocking">
+        <button type="button" id="turn-on" aria-pressed="false">On</button>
+        <button type="button" id="turn-off" aria-pressed="false">Off</button>
+      </div>
+    </section>
+
+    <fieldset id="areas">
+      <legend>Hide on</legend>
+      <div class="pills">
+        <label class="pill"><input type="checkbox" data-area="home" /><span class="dot"></span>Home</label>
+        <label class="pill"><input type="checkbox" data-area="subscriptions" /><span class="dot"></span>Subscriptions</label>
+        <label class="pill"><input type="checkbox" data-area="search" /><span class="dot"></span>Search</label>
+        <label class="pill"><input type="checkbox" data-area="shorts" /><span class="dot"></span>Shorts</label>
+        <label class="pill"><input type="checkbox" data-area="other" /><span class="dot"></span>Other pages</label>
+      </div>
+      <p class="fine">Shorts applies on every page. Other pages covers the watch page and channels.</p>
+    </fieldset>
+
+    <section>
+      <label class="control-label" for="keywords">Also hide</label>
+      <textarea id="keywords" rows="3" spellcheck="false" placeholder="Leonida&#10;Some channel name"></textarea>
+      <p class="fine">One word or phrase per line, matched against titles and channel names.</p>
+    </section>
+
+    <script src="../src/settings.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
