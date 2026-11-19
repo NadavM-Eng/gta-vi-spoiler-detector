@@ -53,14 +53,18 @@ function sample(x, y) {
   return color;
 }
 
-function render(size) {
+// padding: transparent pixels left around the artwork on every side.
+function render(size, padding = 0) {
   const pixels = Buffer.alloc(size * size * 4);
+  const inner = size - 2 * padding;
   for (let py = 0; py < size; py++) {
     for (let px = 0; px < size; px++) {
       let r = 0, g = 0, b = 0, covered = 0;
       for (let sy = 0; sy < SAMPLES; sy++) {
         for (let sx = 0; sx < SAMPLES; sx++) {
-          const color = sample((px + (sx + 0.5) / SAMPLES) / size, (py + (sy + 0.5) / SAMPLES) / size);
+          const x = (px + (sx + 0.5) / SAMPLES - padding) / inner;
+          const y = (py + (sy + 0.5) / SAMPLES - padding) / inner;
+          const color = sample(x, y);
           if (!color) continue;
           r += color[0]; g += color[1]; b += color[2];
           covered++;
@@ -114,3 +118,9 @@ for (const size of SIZES) {
   fs.writeFileSync(file, encodePng(size, render(size)));
   console.log(`icons/icon-${size}.png`);
 }
+
+// The Chrome Web Store listing wants 96px artwork centred in a 128px image.
+const storeDir = path.join(__dirname, '..', 'store', 'chrome');
+fs.mkdirSync(storeDir, { recursive: true });
+fs.writeFileSync(path.join(storeDir, 'store-icon-128.png'), encodePng(128, render(128, 16)));
+console.log('store/chrome/store-icon-128.png');
