@@ -32,7 +32,9 @@ YouTube tab                          Extension
 | `src/content.css` | The rules that actually hide things. |
 | `src/background.js` | Keeps the per-session count of hidden videos. |
 | `popup/` | The toolbar popup. |
+| `icons/` | The extension icon in the sizes browsers ask for. |
 | `scripts/build.js` | Builds the release zips. |
+| `scripts/make-icons.js` | Draws the icon and writes the PNG files. |
 | `test/` | Node tests for the matcher and the counter. |
 
 Internal names use the prefix `gsd` (attributes such as `data-gsd-hidden`, globals such as `GSDMatcher`).
@@ -182,7 +184,7 @@ The same source runs in Chromium browsers and Firefox. The differences are small
 | Firefox calls the API `browser`, Chromium `chrome` | Each script uses `const ext = globalThis.browser \|\| globalThis.chrome`. |
 | Zip entry paths | `scripts/build.js` writes the zip itself so paths always use `/`, which Firefox requires. |
 
-`node scripts/build.js` copies `src/` and `popup/` into `dist/chromium` and `dist/firefox`, writes the
+`node scripts/build.js` copies `src/`, `popup/` and `icons/` into `dist/chromium` and `dist/firefox`, writes the
 right manifest into each, and zips them.
 
 Safari is not supported. A Safari build has to be converted and signed with Xcode on a Mac.

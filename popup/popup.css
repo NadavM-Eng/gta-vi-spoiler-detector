@@ -1,5 +1,15 @@
 /* Follows the "Size Lab" design language: warm paper, hairline borders, pills, one green accent. */
 
+/* Archivo ships inside the extension (SIL Open Font License, see fonts/OFL.txt),
+   so the popup makes no network requests. One variable file covers both weights. */
+@font-face {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url("fonts/archivo-latin.woff2") format("woff2");
+}
+
 :root {
   --page: #e8e6e1;
   --surface: #f4f3ef;

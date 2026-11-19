@@ -79,7 +79,7 @@ A title such as "GTA V vs GTA VI" is hidden, because it mentions GTA VI.
 ## Privacy
 
 The extension collects nothing and sends nothing anywhere. Your settings are kept in the browser's own
-extension storage. The only network request it makes is loading the popup's font from Google Fonts.
+extension storage. It makes no network requests at all; even the popup's font is bundled inside it.
 
 ## For developers
 

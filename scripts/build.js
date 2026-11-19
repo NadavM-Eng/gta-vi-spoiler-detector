@@ -11,7 +11,7 @@ const zlib = require('node:zlib');
 
 const ROOT = path.join(__dirname, '..');
 const DIST = path.join(ROOT, 'dist');
-const SHIPPED_FOLDERS = ['src', 'popup'];
+const SHIPPED_FOLDERS = ['src', 'popup', 'icons'];
 
 const baseManifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'manifest.json'), 'utf8'));
 const firefoxOverrides = JSON.parse(fs.readFileSync(path.join(ROOT, 'manifest.firefox.json'), 'utf8'));
