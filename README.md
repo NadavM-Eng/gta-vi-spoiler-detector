@@ -96,4 +96,9 @@ node scripts/build.js
 The first command runs the tests. The second builds both zip files into `dist/`. Neither needs any
 dependencies.
 
+## Licence
+
+MIT. See [LICENSE](LICENSE). The bundled Archivo font is under the SIL Open Font License, in
+[popup/fonts/OFL.txt](popup/fonts/OFL.txt).
+
 Not affiliated with Rockstar Games, Take-Two Interactive or YouTube.
