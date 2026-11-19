@@ -20,9 +20,9 @@ globalThis.chrome = {
 const { whenIdle } = require('../src/background.js');
 
 test('counts each video once across overlapping reports', async () => {
-  listener({ type: 'gsb:hidden', ids: ['aaa111', 'bbb222'] }); // tab 1
-  listener({ type: 'gsb:hidden', ids: ['bbb222', 'ccc333'] }); // tab 2, sent before tab 1 is saved
-  listener({ type: 'gsb:hidden', ids: ['aaa111'] }); // same video seen again
+  listener({ type: 'gsd:hidden', ids: ['aaa111', 'bbb222'] }); // tab 1
+  listener({ type: 'gsd:hidden', ids: ['bbb222', 'ccc333'] }); // tab 2, sent before tab 1 is saved
+  listener({ type: 'gsd:hidden', ids: ['aaa111'] }); // same video seen again
   await whenIdle();
   assert.strictEqual(store.hiddenCount, 3);
   assert.deepStrictEqual([...store.hiddenIds].sort(), ['aaa111', 'bbb222', 'ccc333']);
@@ -30,7 +30,7 @@ test('counts each video once across overlapping reports', async () => {
 
 test('ignores unrelated or malformed messages', async () => {
   listener({ type: 'something-else', ids: ['zzz999'] });
-  listener({ type: 'gsb:hidden' });
+  listener({ type: 'gsd:hidden' });
   listener(null);
   await whenIdle();
   assert.strictEqual(store.hiddenCount, 3);

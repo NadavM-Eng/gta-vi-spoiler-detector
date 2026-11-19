@@ -1,3 +1,6 @@
+// Firefox exposes the extension API as `browser`, Chromium browsers as `chrome`.
+const ext = globalThis.browser || globalThis.chrome;
+
 const turnOnButton = document.getElementById('turn-on');
 const turnOffButton = document.getElementById('turn-off');
 const keywordsInput = document.getElementById('keywords');
@@ -29,36 +32,36 @@ function showEnabled(enabled) {
 
 // The total is kept by the background worker: distinct videos hidden since the browser was opened.
 async function refreshCount() {
-  const { hiddenCount = 0 } = await chrome.storage.session.get('hiddenCount');
+  const { hiddenCount = 0 } = await ext.storage.session.get('hiddenCount');
   countNumber.textContent = String(hiddenCount);
   countUnit.textContent = hiddenCount === 1 ? 'video' : 'videos';
 }
 
 function setEnabled(enabled) {
   showEnabled(enabled);
-  chrome.storage.sync.set({ enabled });
+  ext.storage.sync.set({ enabled });
 }
 
 turnOnButton.addEventListener('click', () => setEnabled(true));
 turnOffButton.addEventListener('click', () => setEnabled(false));
 
 areasGroup.addEventListener('change', () => {
-  chrome.storage.sync.set({ areas: readAreas() });
+  ext.storage.sync.set({ areas: readAreas() });
 });
 
 keywordsInput.addEventListener('input', () => {
   clearTimeout(saveTimer);
   saveTimer = setTimeout(() => {
-    chrome.storage.sync.set({ extraKeywords: parseKeywords(keywordsInput.value) });
+    ext.storage.sync.set({ extraKeywords: parseKeywords(keywordsInput.value) });
   }, 400);
 });
 
 // Keep the number live while the popup is open.
-chrome.storage.onChanged.addListener((changes, storageArea) => {
+ext.storage.onChanged.addListener((changes, storageArea) => {
   if (storageArea === 'session' && changes.hiddenCount) refreshCount();
 });
 
-GSBSettings.load().then((settings) => {
+GSDSettings.load().then((settings) => {
   showEnabled(settings.enabled);
   for (const input of areaInputs) input.checked = settings.areas[input.dataset.area];
   keywordsInput.value = settings.extraKeywords.join('\n');

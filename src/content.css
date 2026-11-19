@@ -1,13 +1,13 @@
 /*
- * Every rule is gated on html[data-gsb-active], which only content.js sets.
- * If the script does not run, or the blocker is switched off, nothing here applies.
+ * Every rule is gated on html[data-gsd-active], which only content.js sets.
+ * If the script does not run, or the detector is switched off, nothing here applies.
  *
  * The card list in the first rule must stay in sync with UNIT_SELECTORS in content.js.
  */
 
 /* Cards stay invisible (but keep their space) until content.js has read their title,
    so a spoiler title or thumbnail never flashes on screen. */
-html[data-gsb-active] :is(
+html[data-gsd-active] :is(
   yt-lockup-view-model,
   ytm-shorts-lockup-view-model-v2,
   ytm-shorts-lockup-view-model,
@@ -21,13 +21,13 @@ html[data-gsb-active] :is(
   ytd-compact-playlist-renderer,
   ytd-reel-item-renderer,
   .ytp-videowall-still
-):not([data-gsb-checked]) {
+):not([data-gsd-checked]) {
   visibility: hidden;
   /* Failsafe: if a card is never classified (YouTube changed its markup), show it anyway. */
-  animation: gsb-reveal 0s linear 2s forwards;
+  animation: gsd-reveal 0s linear 2s forwards;
 }
 
-@keyframes gsb-reveal {
+@keyframes gsd-reveal {
   to {
     visibility: visible;
   }
@@ -35,7 +35,7 @@ html[data-gsb-active] :is(
 
 /* A matched card, or a shelf whose cards were all matched. display:none takes it out of
    the layout, so the surrounding grid closes the gap by itself. */
-html[data-gsb-active] [data-gsb-hidden],
-html[data-gsb-active] [data-gsb-hidden-shelf] {
+html[data-gsd-active] [data-gsd-hidden],
+html[data-gsd-active] [data-gsd-hidden-shelf] {
   display: none !important;
 }

@@ -1,0 +1,14 @@
+{
+  "background": {
+    "scripts": ["src/background.js"]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "gta-vi-spoiler-detector@nadavm-eng.github.io",
+      "strict_min_version": "127.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  }
+}

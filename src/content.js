@@ -2,10 +2,10 @@
 (() => {
   'use strict';
 
-  const ATTR_ACTIVE = 'data-gsb-active'; // on <html>: blocker is on
-  const ATTR_CHECKED = 'data-gsb-checked'; // on a card: title has been read
-  const ATTR_HIDDEN = 'data-gsb-hidden'; // on a card's container: matched, hide it
-  const ATTR_HIDDEN_SHELF = 'data-gsb-hidden-shelf'; // on a shelf: heading matched or every card is hidden
+  const ATTR_ACTIVE = 'data-gsd-active'; // on <html>: detector is on
+  const ATTR_CHECKED = 'data-gsd-checked'; // on a card: title has been read
+  const ATTR_HIDDEN = 'data-gsd-hidden'; // on a card's container: matched, hide it
+  const ATTR_HIDDEN_SHELF = 'data-gsd-hidden-shelf'; // on a shelf: heading matched or every card is hidden
 
   // One entry per kind of video card. Keep in sync with the list in content.css.
   const UNIT_SELECTORS = [
@@ -58,9 +58,12 @@
     ['ytd-browse[page-subtype="subscriptions"]', 'subscriptions'],
   ];
 
+  // Firefox exposes the extension API as `browser`, Chromium browsers as `chrome`.
+  const ext = globalThis.browser || globalThis.chrome;
+
   const root = document.documentElement;
-  let isSpoiler = GSBMatcher.buildMatcher([]);
-  let areas = { ...GSBSettings.DEFAULTS.areas };
+  let isSpoiler = GSDMatcher.buildMatcher([]);
+  let areas = { ...GSDSettings.DEFAULTS.areas };
   // Last area + text seen per card. YouTube reuses card elements for different videos,
   // so a card is re-judged whenever either changes.
   let lastText = new WeakMap();
@@ -204,7 +207,7 @@
     const ids = unreportedVideos;
     unreportedVideos = [];
     try {
-      chrome.runtime.sendMessage({ type: 'gsb:hidden', ids }).catch(() => {});
+      ext.runtime.sendMessage({ type: 'gsd:hidden', ids }).catch(() => {});
     } catch {
       // The extension was reloaded while this tab stayed open; the count resumes after a page reload.
     }
@@ -303,7 +306,7 @@
 
   function applySettings(settings) {
     root.toggleAttribute(ATTR_ACTIVE, settings.enabled);
-    isSpoiler = GSBMatcher.buildMatcher(settings.extraKeywords);
+    isSpoiler = GSDMatcher.buildMatcher(settings.extraKeywords);
     areas = settings.areas;
     settingsLoaded = true;
     lastText = new WeakMap(); // keywords or areas may have changed: judge every card again
@@ -326,8 +329,8 @@
   document.addEventListener('yt-navigate-finish', scanAll); // YouTube's in-page navigation
   document.addEventListener('yt-page-data-updated', scanAll);
 
-  GSBSettings.load().then(applySettings);
-  chrome.storage.onChanged.addListener((changes, storageArea) => {
-    if (storageArea === 'sync') GSBSettings.load().then(applySettings);
+  GSDSettings.load().then(applySettings);
+  ext.storage.onChanged.addListener((changes, storageArea) => {
+    if (storageArea === 'sync') GSDSettings.load().then(applySettings);
   });
 })();

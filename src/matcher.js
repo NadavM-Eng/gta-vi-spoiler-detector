@@ -46,6 +46,6 @@
   }
 
   const api = { buildMatcher, normalize };
-  root.GSBMatcher = api;
+  root.GSDMatcher = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

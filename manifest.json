@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "GTA 6 Spoiler Blocker",
-  "version": "0.3.0",
-  "description": "Hides GTA 6 videos on YouTube, matched by title and channel name. Other GTA games are left alone.",
+  "name": "GTA VI Spoiler Detector",
+  "version": "1.0.0",
+  "description": "Hides GTA VI videos on YouTube so nothing gets spoiled. Other GTA games are left alone.",
   "permissions": ["storage"],
   "background": {
     "service_worker": "src/background.js"
@@ -16,7 +16,7 @@
     }
   ],
   "action": {
-    "default_title": "GTA 6 Spoiler Blocker",
+    "default_title": "GTA VI Spoiler Detector",
     "default_popup": "popup/popup.html"
   }
 }
