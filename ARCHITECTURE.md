@@ -195,7 +195,8 @@ Safari is not supported. A Safari build has to be converted and signed with Xcod
   inspected first, then the content script's files were run on live search and channel pages with the
   extension APIs stubbed, checking which cards were hidden, that kept cards were visible, that grid
   columns stayed aligned, and that each area switch did what it says. The screenshots in the README
-  come from those runs.
+  come from those runs: the page and the popup are real captures, placed together in one image
+  with a plain browser frame drawn around them.
 
 Not covered by any of this: the signed-in home and subscriptions feeds, the watch-page sidebar, and
 Firefox.

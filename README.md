@@ -3,9 +3,13 @@
 A browser extension that hides GTA VI videos on YouTube, so you can keep using YouTube without the game
 being spoiled. Videos about other GTA games stay where they are.
 
-| Spoiler detector off | Spoiler detector on |
-|---|---|
-| ![YouTube grid full of GTA VI videos](docs/detector-off.jpg) | ![The same grid with the GTA VI videos gone](docs/detector-on.jpg) |
+**Spoiler detector off**
+
+![YouTube full of GTA VI videos, with the extension switched off](docs/detector-off.jpg)
+
+**Spoiler detector on**
+
+![The same page with the GTA VI videos gone, with the extension switched on](docs/detector-on.jpg)
 
 ## The problem
 
